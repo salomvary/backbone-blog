@@ -1,0 +1,10 @@
+.console{
+	width: 200px;
+	position: fixed;
+	right:0;
+	top:0;
+	font-family: monospace;
+	padding: 0.5em;
+	background: black;
+	color: white;
+}

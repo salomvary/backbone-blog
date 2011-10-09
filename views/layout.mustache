@@ -1,5 +1,8 @@
 <!doctype html>
 <html>
+	<head>
+		<link rel="stylesheet" href="/stylesheets/application.css">
+	</head>
 	<body>
 		<header>	
 			<h1>Hello World</h1>
@@ -7,11 +10,16 @@
 				<a href='/'>main</a>
 			</nav>
 		</header>
-		<section>
+		<div role="main">
 			{{{ body }}}
-		</section>
+		</div>
 		<footer>
-			<div id="log"></div>
+			<div id="log" class="console"></div>
 		</footer>
+		<script src="/javascripts/jquery.js"></script>
+		<script src="/javascripts/underscore.js"></script>
+		<script src="/javascripts/backbone.js"></script>
+		<script src="/javascripts/lib.js"></script>
+		<script src="/javascripts/application.js"></script>
 	</body>
 </html>
