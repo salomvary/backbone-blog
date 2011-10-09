@@ -1,0 +1,13 @@
+{{#post}}
+	<h2>{{title}}</h2>
+	<p>
+		tags:
+		{{#tags}}
+			<a href='/tags/{{.}}'>{{.}}</a>
+		{{/tags}}
+	</p>
+	<p>
+		{{{body}}}
+	</p>
+{{/post}}
+

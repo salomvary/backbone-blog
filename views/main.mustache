@@ -1,0 +1,8 @@
+<ul>
+	{{#posts}}
+		<li> 
+			<a href='/posts/{{_id}}'>{{title}}</a>
+			( {{#tags}}<a href='/tags/{{.}}'>{{.}}</a> {{/tags}})
+		</li>
+	{{/posts}}
+</ul>

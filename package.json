@@ -1,0 +1,9 @@
+{
+	"name": "crawlable-js-mvc",
+	"version": "0.1.0",
+	"dependencies": {
+		"express": "2.4.x",
+		"mustachio": "0.2.x"
+	}
+}
+
