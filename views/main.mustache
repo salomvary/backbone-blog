@@ -1,8 +1,8 @@
 <ul>
 	{{#posts}}
 		<li> 
-			<a href='/posts/{{_id}}'>{{title}}</a>
-			( {{#tags}}<a href='/tags/{{.}}'>{{.}}</a> {{/tags}})
+			<h3><a href='/posts/{{_id}}'>{{title}}</a></h3>
+			tags: {{#tags}}<a href='/tags/{{.}}'>{{.}}</a> {{/tags}}
 		</li>
 	{{/posts}}
 </ul>

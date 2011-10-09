@@ -1,5 +1,16 @@
-[
-{ "_id" : "1", "body" : "<b>test one body</b>", "tags" : [ "green", "blue" ], "title" : "test one" },
-{ "_id" : "3", "title" : "test three", "body" : "<b>test three body</b>", "tags" : [ "red" ] },
-{ "_id" : "2", "body" : "<b>test two body</b>", "tags" : [ "green", "red" ], "title" : "test two" }
-]
+[{
+    "_id": "1",
+    "title": "SwipePad, Smozzy, Flickr and More",
+    "tags": ["androidappsoftheweek", "androidapps", "apps", "bestandroidapps", "top"],
+    "body": "SwipePad is a better app switcher for your Android phone. Instead of holding down the home button to launch your recent apps, SwipePad uses hotspots-corners and edges of your phone\u0027s screen-to trigger a new \u0027pad\u0027 (which is sorta like a dashboard of apps). Just drag your finger from a hotspot to the middle of the screen and the app switcher will pop up. It\u0027s like adding another layer to your phone."
+}, {
+    "_id": "3",
+    "title": "Galaxy Nexus (and Android Ice Cream Sandwich) Are Gonna Be a Little Late (Update: It’s Out of Respect for Steve)",
+    "tags": ["android", "galaxynexus", "nexusprime"],
+    "body": "Looks like we won\u0027t be seeing the Galaxy Nexus (formerly/maybe-still the Nexus Prime) as soon as we\u0027d hoped. Samsung had been expected to launch its new Google phone at CTIA next Tuesday, but they\u0027ve sent out a semi-last-minute notice that that\u0027ll have to wait. Update: Samsung USA confirms."
+}, {
+    "_id": "2",
+    "title": "HTC Sensation XL Is About to Go King Kong on Europe and Asia",
+    "tags":["android", "htc", "sensation", "xl", "gizmodouk", "kathannaford"],
+    "body": "The HTC Sensation is packing a 4.7-inch screen, Beats by Dre audio, and a camera that doesn\u0027t mess around. This big boy is ready to do some stomping. Our Kat Hannaford at Gizmodo UK has given it 4 Stars. Click on over to Gizmodo UK for the hands-on, review, and video of the HTC Sensation XL."
+}]
