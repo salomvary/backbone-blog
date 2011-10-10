@@ -65,7 +65,7 @@ PostView = RenderedView.extend({
 TagView = RenderedView.extend({
 	urlRoot: '/tags',
 	initialize: function(options) {
-		console.log('TagView init', options.tag);
+		console.log('TagView init', options.id);
 	}
 });
 
