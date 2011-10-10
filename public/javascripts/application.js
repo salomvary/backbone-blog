@@ -11,7 +11,9 @@ Blog = Controller.extend({
 
 	initialize: function() {
 		this.log = new LogView({el: '#log'});
-		this.content = new ViewManager('[role=main]');
+		this.content = new ViewManager({el: '[role=main]'});
+		this.breadcrumb = new Breadcrumb({el: 'header nav'});
+		this.content.bind('show', this.breadcrumb.update, this.breadcrumb);
 	},
 
 	main: function() {
@@ -70,6 +72,20 @@ TagView = RenderedView.extend({
 LogView = Backbone.View.extend({
 	debug: function(msg) {
 		$('<div/>').text(msg).appendTo(this.el);
+	}
+});
+
+Breadcrumb = Backbone.View.extend({
+	initialize: function() {
+		this.main = $(this.el).children('a:first');
+	},
+	update: function(view) {
+		this.main.nextAll().remove();
+		if(view.urlRoot !== '/') {
+			$('<span> » </span>')
+				.insertAfter(this.main)
+				.after($('<b/>', {text: view.urlRoot}));
+		}
 	}
 });
 

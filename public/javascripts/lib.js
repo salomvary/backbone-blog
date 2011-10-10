@@ -21,9 +21,6 @@ RenderedView = function(options) {
 	}
 	Backbone.View.apply(this, arguments);
 	this.model.bind('change', this.render, this);
-	this.model.bind('all', function(e) {
-		console.log(e);
-	});
 
 	if($(this.el).is(':empty')) {
 		this.fetch();	
@@ -53,20 +50,17 @@ RenderedModel = Backbone.Model.extend({
 	}
 });
 
-ViewManager = function(container) {
-	this.container = $(container);
-};
-
-_.extend(ViewManager.prototype, {
+ViewManager = Backbone.View.extend({
 	show: function(view, options) {
 		if(this.view) {
 			this.view.remove();
-		} else if(! this.container.is(':empty')) {
-			var el = this.container.children(':first');
+		} else if(! $(this.el).is(':empty')) {
+			var el = $(this.el).children(':first');
 		}
 		this.view = new view(_.extend({el: el}, options));
 		if(! el) {
-			this.container.html(this.view.el);
+			$(this.el).html(this.view.el);
 		}
+		this.trigger('show', this.view);
 	}
 });
