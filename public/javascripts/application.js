@@ -1,4 +1,6 @@
-Blog = Controller.extend({
+require(['lib'], function(lib) {
+
+Blog = lib.Controller.extend({
 	routes: {
 		'':            'main',
 		'posts/:id':   'post',
@@ -11,7 +13,7 @@ Blog = Controller.extend({
 
 	initialize: function() {
 		this.log = new LogView({el: '#log'});
-		this.content = new ViewManager({el: '[role=main]'});
+		this.content = new lib.ViewManager({el: '[role=main]'});
 		this.breadcrumb = new Breadcrumb({el: 'header nav'});
 		this.content.bind('show', this.breadcrumb.update, this.breadcrumb);
 
@@ -51,14 +53,14 @@ Blog = Controller.extend({
 
 });
 
-MainView = RenderedView.extend({
+MainView = lib.RenderedView.extend({
 	urlRoot: '/',
 	initialize: function() {
 		console.log('MainView init');
 	}
 });
 
-PostView = RenderedView.extend({
+PostView = lib.RenderedView.extend({
 	urlRoot: '/posts',
 	events: {
 		'click': 'clicked'
@@ -76,7 +78,7 @@ PostView = RenderedView.extend({
 	}
 });
 
-TagView = RenderedView.extend({
+TagView = lib.RenderedView.extend({
 	urlRoot: '/tags',
 	initialize: function(options) {
 		console.log('TagView init', options.id);
@@ -150,4 +152,6 @@ TwitterSearch = Backbone.View.extend({
 
 $(function() {
 	window.blog = new Blog({el:'body'});
+});
+
 });

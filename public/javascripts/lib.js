@@ -1,4 +1,6 @@
-Controller = function(options) {
+define(['order!jquery', 'order!underscore', 'order!backbone'], function() {
+
+var Controller = function(options) {
 	this.router = new Backbone.Router();
 	_.each(this.routes, function(handler, route) {
 		this.router.route(route, handler, _.bind(this[handler], this));
@@ -10,7 +12,7 @@ Controller = function(options) {
 _.extend(Controller.prototype, Backbone.View.prototype);
 Controller.extend = Backbone.View.extend;
 
-RenderedView = function(options) {
+var RenderedView = function(options) {
 	var args = arguments;
 	_.extend(this, $.Deferred());
 	options = _.extend({}, options);
@@ -53,7 +55,7 @@ _.extend(RenderedView.prototype, Backbone.View.prototype, {
 });
 RenderedView.extend = Backbone.View.extend;
 
-RenderedModel = Backbone.Model.extend({
+var RenderedModel = Backbone.Model.extend({
 	initialize: function(attributes, options) {
 		this.urlRoot = options.urlRoot;
 	},
@@ -66,7 +68,7 @@ RenderedModel = Backbone.Model.extend({
 	}
 });
 
-ViewManager = Backbone.View.extend({
+var ViewManager = Backbone.View.extend({
 	show: function(view, options) {
 		if(this.view) {
 			this.view.remove();
@@ -83,4 +85,13 @@ ViewManager = Backbone.View.extend({
 			this.trigger('show', this.view);
 		}
 	}
+});
+
+return {
+	Controller: Controller,
+	RenderedView: RenderedView,
+	RenderedModel: RenderedModel,
+	ViewManager: ViewManager
+};
+
 });
