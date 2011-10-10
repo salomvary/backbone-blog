@@ -14,6 +14,9 @@ Blog = Controller.extend({
 		this.content = new ViewManager({el: '[role=main]'});
 		this.breadcrumb = new Breadcrumb({el: 'header nav'});
 		this.content.bind('show', this.breadcrumb.update, this.breadcrumb);
+
+		this.twitter = new TwitterSearch({el: '#twitter'});
+		this.content.bind('show', this.twitter.updateWithView, this.twitter);
 	},
 
 	main: function() {
@@ -59,6 +62,11 @@ PostView = RenderedView.extend({
 	},
 	clicked: function(){
 		console.log('PostView clicked');
+	},
+	parse: function(el) {
+		return {
+			title: el.find('h2').text()
+		};
 	}
 });
 
@@ -85,6 +93,51 @@ Breadcrumb = Backbone.View.extend({
 			$('<span> » </span>')
 				.insertAfter(this.main)
 				.after($('<b/>', {text: view.urlRoot}));
+		}
+	}
+});
+
+Tweets = Backbone.Collection.extend({
+	searchUrl: 'http://search.twitter.com/search.json?callback=?&',
+
+	search: function(params) {
+		this.url = this.searchUrl +
+			$.param(params);
+		return this.fetch();
+	},
+
+	parse: function(response) {
+		return response.results;
+	}
+
+});
+
+TwitterSearch = Backbone.View.extend({
+
+	initialize: function() {
+		this.collection = new Tweets()
+			.bind('reset', this.render, this);
+	},
+
+	render: function() {
+		var el = $(this.el);
+		el.empty();
+		this.collection.each(function(tweet) {
+			el.append($('<li/>',{text: tweet.get('text')}));
+		});
+		return this;
+	},
+
+	updateWithView: function(view) {
+		if(view.model.get('title')) {
+			var term = view.model.get('title').match(/\w+\W+\w+/)[0],
+				el = $(this.el);
+			this.collection.search({q: term, rpp:5})
+				.done(function() {
+					el.show();
+				});
+		} else {
+			$(this.el).hide();
 		}
 	}
 });

@@ -24,13 +24,14 @@ RenderedView = function(options) {
 	}
 
 	Backbone.View.apply(this, args);
-	this.model.bind('change', this.render, this);
+	this.model.bind('change:html', this.render, this);
 
 	if($(this.el).is(':empty')) {
 		var fetching = this.fetch();
 	}
 
 	$.when(fetching).done($.proxy(function() {
+		this.model.set(this.parse($(this.el)));
 		this.resolve();
 	}, this));
 };
@@ -43,7 +44,11 @@ _.extend(RenderedView.prototype, Backbone.View.prototype, {
 		var replacement = $(this.model.get('html'));
 		$(this.el).replaceWith(replacement);
 		this.el = replacement.get(0);
+		this.trigger('render');
 		return replacement;
+	},
+	parse: function(el) {
+		return null;
 	}
 });
 RenderedView.extend = Backbone.View.extend;
@@ -72,8 +77,10 @@ ViewManager = Backbone.View.extend({
 		if(! existingContent) {
 			$.when(this.view).always($.proxy(function() {
 				$(this.el).html(this.view.el);
+				this.trigger('show', this.view);
 			}, this));
+		} else {
+			this.trigger('show', this.view);
 		}
-		this.trigger('show', this.view);
 	}
 });
