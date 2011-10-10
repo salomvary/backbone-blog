@@ -17,6 +17,12 @@ Blog = Controller.extend({
 
 		this.twitter = new TwitterSearch({el: '#twitter'});
 		this.content.bind('show', this.twitter.updateWithView, this.twitter);
+
+		this.title = document.title;
+		this.content.bind('show', function(view) {
+			var title = view.model.get('title');
+			document.title = title ? title + ' | ' + this.title : this.title;
+		}, this);
 	},
 
 	main: function() {
