@@ -1,6 +1,13 @@
-require(['lib'], function(lib) {
+require.config({
+	paths: {
+		jquery: 'http://code.jquery.com/jquery-1.7.1',
+		underscore: 'lib/underscore' //backbone.js refers to it
+	}
+});
 
-Blog = lib.Controller.extend({
+require(['jquery', 'lib/backbone', 'lib'], function($, Backbone, lib) {
+
+var Blog = lib.Controller.extend({
 	routes: {
 		'':            'main',
 		'posts/:id':   'post',
@@ -53,14 +60,14 @@ Blog = lib.Controller.extend({
 
 });
 
-MainView = lib.RenderedView.extend({
+var MainView = lib.RenderedView.extend({
 	urlRoot: '/',
 	initialize: function() {
 		console.log('MainView init');
 	}
 });
 
-PostView = lib.RenderedView.extend({
+var PostView = lib.RenderedView.extend({
 	urlRoot: '/posts',
 	events: {
 		'click': 'clicked'
@@ -78,20 +85,20 @@ PostView = lib.RenderedView.extend({
 	}
 });
 
-TagView = lib.RenderedView.extend({
+var TagView = lib.RenderedView.extend({
 	urlRoot: '/tags',
 	initialize: function(options) {
 		console.log('TagView init', options.id);
 	}
 });
 
-LogView = Backbone.View.extend({
+var LogView = Backbone.View.extend({
 	debug: function(msg) {
 		$('<div/>').text(msg).appendTo(this.el);
 	}
 });
 
-Breadcrumb = Backbone.View.extend({
+var Breadcrumb = Backbone.View.extend({
 	initialize: function() {
 		this.main = $(this.el).children('a:first');
 	},
@@ -105,7 +112,7 @@ Breadcrumb = Backbone.View.extend({
 	}
 });
 
-Tweets = Backbone.Collection.extend({
+var Tweets = Backbone.Collection.extend({
 	searchUrl: 'http://search.twitter.com/search.json?callback=?&',
 
 	search: function(params) {
@@ -120,7 +127,7 @@ Tweets = Backbone.Collection.extend({
 
 });
 
-TwitterSearch = Backbone.View.extend({
+var TwitterSearch = Backbone.View.extend({
 
 	initialize: function() {
 		this.collection = new Tweets()
@@ -151,7 +158,7 @@ TwitterSearch = Backbone.View.extend({
 });
 
 $(function() {
-	window.blog = new Blog({el:'body'});
+	new Blog({el:'body'});
 });
 
 });

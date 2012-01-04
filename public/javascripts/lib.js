@@ -1,4 +1,4 @@
-define(['order!jquery', 'order!underscore', 'order!backbone'], function() {
+define(['jquery', 'underscore', 'lib/backbone'], function($, _, Backbone) {
 
 var Controller = function(options) {
 	this.router = new Backbone.Router();
