@@ -7,6 +7,9 @@ require.config({
 
 require(['jquery', 'lib/backbone', 'lib'], function($, Backbone, lib) {
 
+/**
+ * The main controller of the blog.
+ */
 var Blog = lib.Controller.extend({
 	routes: {
 		'':            'main',
@@ -60,6 +63,9 @@ var Blog = lib.Controller.extend({
 
 });
 
+/** 
+ * Index page, list of all posts.
+ */
 var MainView = lib.RenderedView.extend({
 	urlRoot: '/',
 	initialize: function() {
@@ -67,6 +73,9 @@ var MainView = lib.RenderedView.extend({
 	}
 });
 
+/**
+ * Single post.
+ */
 var PostView = lib.RenderedView.extend({
 	urlRoot: '/posts',
 	events: {
@@ -85,6 +94,9 @@ var PostView = lib.RenderedView.extend({
 	}
 });
 
+/**
+ * List of posts belonging to a tag.
+ */
 var TagView = lib.RenderedView.extend({
 	urlRoot: '/tags',
 	initialize: function(options) {
@@ -92,12 +104,18 @@ var TagView = lib.RenderedView.extend({
 	}
 });
 
+/**
+ * Simple log console.
+ */
 var LogView = Backbone.View.extend({
 	debug: function(msg) {
 		$('<div/>').text(msg).appendTo(this.el);
 	}
 });
 
+/**
+ * Breadcrumb for navigation.
+ */
 var Breadcrumb = Backbone.View.extend({
 	initialize: function() {
 		this.main = $(this.el).children('a:first');
@@ -112,6 +130,9 @@ var Breadcrumb = Backbone.View.extend({
 	}
 });
 
+/**
+ * Tweets {@link Backbone.Collection}.
+ */
 var Tweets = Backbone.Collection.extend({
 	searchUrl: 'http://search.twitter.com/search.json?callback=?&',
 
@@ -127,6 +148,9 @@ var Tweets = Backbone.Collection.extend({
 
 });
 
+/**
+ * Context-sensitive Twitter sidebar. 
+ */
 var TwitterSearch = Backbone.View.extend({
 
 	initialize: function() {
@@ -157,6 +181,7 @@ var TwitterSearch = Backbone.View.extend({
 	}
 });
 
+// start on DOMContentLoaded
 $(function() {
 	new Blog({el:'body'});
 });
