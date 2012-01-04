@@ -13,16 +13,16 @@ app.configure(function() {
 var Posts = JSON.parse(fs.readFileSync('db.json'), 'UTF-8');
 
 // routes
-app.get('/', function(req, res){
+app.get('/.:format?', function(req, res){
 	res.render('main', {posts: Posts, layout: !req.xhr});
 });
 
-app.get('/posts/:id', function(req, res){
+app.get('/posts/:id.:format?', function(req, res){
 	var post = Posts.filter(function(p) {return p._id === req.params.id;})[0];
 	res.render('post', {post: post, layout: !req.xhr});
 });
 
-app.get('/tags/:tag', function(req, res){
+app.get('/tags/:tag.:format?', function(req, res){
 	var posts = Posts.filter(function(p) {return p.tags.indexOf(req.params.tag) > -1;});
 	res.render('main', {posts: posts, layout: !req.xhr});
 });

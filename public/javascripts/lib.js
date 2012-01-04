@@ -82,6 +82,9 @@ var RenderedModel = Backbone.Model.extend({
 	initialize: function(attributes, options) {
 		this.urlRoot = options.urlRoot;
 	},
+	url: function() {
+		return Backbone.Model.prototype.url.apply(this) + '.html';
+	},
 	parse: function(resp, xhr) {
 		if(typeof resp === 'string') {
 			return {html:resp};
