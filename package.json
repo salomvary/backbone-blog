@@ -1,5 +1,5 @@
 {
-	"name": "crawlable-js-mvc",
+	"name": "backbone-blog",
 	"version": "0.1.0",
 	"dependencies": {
 		"express": "2.4.x",
