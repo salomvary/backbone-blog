@@ -13,6 +13,7 @@ via AJAX requests.
 
 Running: 
 
-- node app.js
+- requirements: nodejs, npm
+- npm install; node app.js
 - point your browser to <http://localhost:3000>
 
